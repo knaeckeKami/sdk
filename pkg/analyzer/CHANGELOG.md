@@ -43,7 +43,7 @@
   IMPLICIT_DYNAMIC_METHOD, IMPLICIT_DYNAMIC_PARAMETER, IMPLICIT_DYNAMIC_RETURN,
   IMPLICIT_DYNAMIC_TYPE, and IMPLICIT_DYNAMIC_VARIABLE.  These were removed in
   version 0.39.3, but it turns out they are actually needed (see
-  https://github.com/dart-lang/sdk/issues/40129).
+  https://github.com/dart-lang/sdk/issues/40129 ).
 * Fixed bugs 35940, 37122, 38554, 38666, 38791, 38990, 39059, 39597, 39694,
   39762, 39791, 39833, 39875, 39876, 39917, 39939, 39976, 40033, 40055, 40057,
   40110, 40129, 40221, 40279, 40283, 40287, 40299, 40304, 40316, 40333, 40392,
