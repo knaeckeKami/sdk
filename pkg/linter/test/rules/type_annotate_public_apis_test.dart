@@ -7,8 +7,7 @@ import 'package:test_reflective_loader/test_reflective_loader.dart';
 import '../rule_test_support.dart';
 
 void main() {
-  // TODO(srawlins): Add tests with constructor parameters, enums, unnamed
-  // extensions.
+  // TODO(srawlins): Add tests with enums, unnamed extensions.
   defineReflectiveSuite(() {
     defineReflectiveTests(TypeAnnotatePublicApisTest);
   });
@@ -243,6 +242,25 @@ extension E on int {
 ''',
       [lint(27, 1)],
     );
+  }
+
+  test_instanceConstructor_parameterMissingType() async {
+    await assertDiagnostics(
+      r'''
+class A {
+  A(p);
+}
+''',
+      [lint(14, 1)],
+    );
+  }
+
+  test_instanceConstructor_privateNamed_parameterMissingType() async {
+    await assertNoDiagnostics(r'''
+class A {
+  A._(p);
+}
+''');
   }
 
   test_instanceMethod_onClass_noReturnType() async {
