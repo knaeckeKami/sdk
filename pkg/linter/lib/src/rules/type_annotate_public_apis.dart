@@ -33,6 +33,7 @@ class TypeAnnotatePublicApis extends AnalysisRule {
     RuleContext context,
   ) {
     var visitor = _Visitor(this);
+    registry.addConstructorDeclaration(this, visitor);
     registry.addFieldDeclaration(this, visitor);
     registry.addFunctionDeclaration(this, visitor);
     registry.addFunctionTypeAlias(this, visitor);
@@ -46,6 +47,17 @@ class _Visitor extends SimpleAstVisitor<void> {
   final _VisitorHelper v;
 
   _Visitor(this.rule) : v = _VisitorHelper(rule);
+
+  @override
+  void visitConstructorDeclaration(ConstructorDeclaration node) {
+    if (node.isAugmentation) return;
+
+    var name = node.name;
+    if (name != null && Identifier.isPrivateName(name.lexeme)) return;
+
+    node.parameters.accept(v);
+  }
+
   @override
   void visitFieldDeclaration(FieldDeclaration node) {
     if (node.isAugmentation) return;
